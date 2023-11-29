@@ -1,3 +1,3 @@
 """Place holder package"""
 
-version = "0.0.2a"
+version = "0.0.1"
