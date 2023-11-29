@@ -2,9 +2,9 @@ import subprocess
 import time
 from typing import Union, Dict, List
 
-from localhost.config import settings
+from localhost.config import settings, SupportedSystems
 from localhost.logger import LOGGER
-from localhost.modules import get_attached_devices
+from localhost.modules import att
 
 
 def parse_host_file() -> Dict[Union[int, str], Union[List[str], str]]:
@@ -15,7 +15,7 @@ def parse_host_file() -> Dict[Union[int, str], Union[List[str], str]]:
         Returns a dictionary of parsed hosts file information.
     """
     host_entries = {}
-    with open(settings.etc_hosts, 'r') as file:
+    with open(settings.etc_hosts) as file:
         for idx, line in enumerate(file):
             # Yield comments and empty lines with an integer as key
             if not line.strip():
@@ -67,31 +67,22 @@ def flush_dns_cache() -> None:
             LOGGER.error("Failed to clear DNS cache")
             break
     else:
-        LOGGER.info("ALL SET!!")
+        LOGGER.info("Finished updating hosts file in %.2fs", time.time() - settings.start)
 
 
-def dump() -> None:
+def dump(model: SupportedSystems) -> None:
     """Dumps all devices' hostname and IP addresses into the hosts file."""
-    try:
-        f = open(settings.etc_hosts, 'w')
-        f.close()
-    except PermissionError:
-        raise PermissionError(
-            "script needs to run with sudo or as an administrator"
+    if model == SupportedSystems.att:
+        get_attached_devices = att.get_attached_devices
+    else:
+        raise EnvironmentError(
+            "Not supported yet"
         )
     host_entries = parse_host_file()
-    eos = False
     for device in get_attached_devices():
-        eos = True
         if device.ipv4_address:
             host_entries[device.ipv4_address] = f"{device.name}"
         else:
             LOGGER.error(device.__dict__)
-    if eos:
-        host_entries[int(time.time())] = "\n# End of section"
     update_host_file(host_entries)
     flush_dns_cache()
-
-
-if __name__ == '__main__':
-    dump()

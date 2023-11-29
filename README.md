@@ -1,6 +1,13 @@
 # DNS Resolver
 DNS Resolver is a python script that dumps hostname and IP address mapping for localhost into host file
 
+### Usage
+```python
+import localhost
+
+localhost.dump(localhost.SupportedSystems.att)
+```
+
 ### Note
 > This is a hacky solution for a real problem. The best approach would be [run your own DNS server][howto]
 

@@ -1,4 +1,5 @@
 import platform
+import time
 from enum import Enum
 from typing import Callable, Tuple
 
@@ -29,6 +30,7 @@ class Settings:
     else:
         flush_dns: Tuple = tuple()
     # Unlike Windows and macOS, Ubuntu and Linux Mint do not cache DNS queries at the operating system level by default.
+    start = time.time()
 
 
 settings = Settings()
