@@ -2,9 +2,9 @@ import subprocess
 import time
 from typing import Union, Dict, List
 
-from netsync.config import settings, SupportedSystems
-from netsync.logger import LOGGER
-from netsync.modules import att
+from netfuse.config import settings, SupportedSystems
+from netfuse.logger import LOGGER
+from netfuse.modules import att
 
 
 def parse_host_file() -> Dict[Union[int, str], Union[List[str], str]]:

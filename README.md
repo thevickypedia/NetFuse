@@ -5,9 +5,9 @@ DNS Resolver is a python script that dumps hostname and IP address mapping for l
 ### Usage
 
 ```python
-import netsync
+import netfuse
 
-netsync.dump(netsync.SupportedSystems.att)
+netfuse.dump(netfuse.SupportedSystems.att)
 ```
 
 ### Note

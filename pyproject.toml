@@ -1,0 +1,40 @@
+[project]
+name = "NetFuse"
+dynamic = ["version", "dependencies"]
+description = "Python module to dump hostname and IP address mapping for localhost into host file."
+readme = "README.md"
+authors = [{ name = "Vignesh Rao", email = "svignesh1793@gmail.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: System :: Networking :: Firewalls",
+    "Topic :: System :: Networking :: Monitoring"
+]
+keywords = ["localhost", "network-synchronization", "NetFuse"]
+requires-python = ">=3.8"
+
+[tool.setuptools]
+packages = ["netfuse"]
+
+[tool.setuptools.dynamic]
+version = {attr = "netfuse.version"}
+dependencies = {file = ["netfuse/requirements.txt"]}
+
+[build-system]
+requires      = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+dev = ["sphinx==5.1.1", "pre-commit", "recommonmark", "gitverse"]
+
+[project.urls]
+Homepage = "https://github.com/thevickypedia/NetFuse"
+Docs = "https://thevickypedia.github.io/NetFuse"
+Source = "https://github.com/thevickypedia/NetFuse"
+"Bug Tracker" = "https://github.com/thevickypedia/NetFuse/issues"
+"Release Notes" = "https://github.com/thevickypedia/NetFuse/blob/main/release_notes.rst"
