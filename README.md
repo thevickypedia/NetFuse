@@ -1,2 +1,7 @@
-# dns-resolver-att
-Python script to dump hostname and IP address mapping for localhost into host file
+# DNS Resolver
+DNS Resolver is a python script that dumps hostname and IP address mapping for localhost into host file
+
+### Note
+> This is a hacky solution for a real problem. The best approach would be [run your own DNS server][howto]
+
+[howto]: https://www.howtogeek.com/devops/how-to-run-your-own-dns-server-on-your-local-network/
