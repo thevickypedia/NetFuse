@@ -1,6 +1,8 @@
-# DNS Resolver
+# NetFuse
 
-DNS Resolver is a python script that dumps hostname and IP address mapping for localhost into host file
+NetFuse is a python module to dump hostname and IP address mapping for localhost into the hosts file
+
+> :warning: &nbsp; Currently works only for At&t users
 
 ### Installation
 ```shell
@@ -17,6 +19,6 @@ sudo netfuse
 
 ### Note
 
-> This is a hacky solution for a real problem. The best approach would be [run your own DNS server][howto]
+> This is a hacky solution for a real problem. The best approach would be to [run your own DNS server][howto]
 
 [howto]: https://www.howtogeek.com/devops/how-to-run-your-own-dns-server-on-your-local-network/
