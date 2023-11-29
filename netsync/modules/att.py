@@ -5,9 +5,9 @@ from collections.abc import Generator
 import pandas as pd
 import requests
 
-from localhost.config import settings
-from localhost.logger import LOGGER
-from localhost.modules.squire import Device
+from netsync.config import settings
+from netsync.logger import LOGGER
+from netsync.modules.squire import Device
 
 
 def get_network_id() -> str:
