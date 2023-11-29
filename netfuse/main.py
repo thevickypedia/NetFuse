@@ -2,20 +2,26 @@ import subprocess
 import time
 from typing import Union, Dict, List
 
-from netfuse.config import settings, SupportedSystems
+import click
+
+from netfuse import version as pkg_version
+from netfuse.config import settings
 from netfuse.logger import LOGGER
 from netfuse.modules import att
 
 
-def parse_host_file() -> Dict[Union[int, str], Union[List[str], str]]:
+def parse_host_file(filepath) -> Dict[Union[int, str], Union[List[str], str]]:
     """Parse the host file and convert the host entries into key-value pairs.
+
+    Args:
+        filepath: Host file that matches FQDN with server IPs hosting a specific domain.
 
     Returns:
         Dict[Union[int, str], List[str]]:
         Returns a dictionary of parsed hosts file information.
     """
     host_entries = {}
-    with open(settings.etc_hosts) as file:
+    with open(filepath) as file:
         for idx, line in enumerate(file):
             # Yield comments and empty lines with an integer as key
             if not line.strip():
@@ -38,13 +44,29 @@ def parse_host_file() -> Dict[Union[int, str], Union[List[str], str]]:
     return host_entries
 
 
-def update_host_file(host_entries: Dict) -> None:
+def update_host_file(host_entries: Dict, output_file: str, dry_run: bool) -> None:
     """Update the hosts entry file, with all the devices currently connected to the router.
 
     Args:
         host_entries: Data that has to be dumped into the hosts file.
+        output_file: Host file that matches FQDN with server IPs hosting a specific domain.
+        dry_run: Prints the information instead of writing to hosts file.
     """
-    with open(settings.etc_hosts, 'w') as file:
+    if dry_run:
+        for key, value in host_entries.items():
+            if value is None:
+                print()
+                continue
+            if isinstance(key, int):
+                print(value)
+                continue
+            key = key.split('_')[0]
+            if isinstance(value, list):
+                print(f"{key}\t{', '.join(value)}")
+                continue
+            print(f"{key}\t{value}")
+        return
+    with open(output_file, 'w') as file:
         for key, value in host_entries.items():
             if value is None:
                 file.write("\n")
@@ -70,19 +92,33 @@ def flush_dns_cache() -> None:
         LOGGER.info("Finished updating hosts file in %.2fs", time.time() - settings.start)
 
 
-def dump(model: SupportedSystems) -> None:
+def dump(dry_run: bool, filepath: str, output: str) -> None:
     """Dumps all devices' hostname and IP addresses into the hosts file."""
-    if model == SupportedSystems.att:
-        get_attached_devices = att.get_attached_devices
-    else:
-        raise EnvironmentError(
-            "Not supported yet"
-        )
-    host_entries = parse_host_file()
-    for device in get_attached_devices():
+    host_entries = parse_host_file(filepath)
+    for device in att.get_attached_devices():
         if device.ipv4_address:
-            host_entries[device.ipv4_address] = f"{device.name}"
+            host_entries[device.ipv4_address] = device.name
         else:
             LOGGER.error(device.__dict__)
-    update_host_file(host_entries)
-    flush_dns_cache()
+    update_host_file(host_entries, output, dry_run)
+    if output == settings.etc_hosts:
+        flush_dns_cache()
+
+
+@click.command()
+@click.pass_context
+@click.option("-v", "--version", required=False, is_flag=True, help="Get version of the package")
+@click.option("-d", "--dry", required=False, is_flag=True, help="Dry run without updating the hosts file")
+@click.option("-p", "--path", required=False, default=settings.etc_hosts,
+              help=f"Path for the hosts file, defaults to: {settings.etc_hosts}")
+@click.option("-o", "--output", required=False, default=settings.etc_hosts,
+              help=f"Output filepath to write the updated entries, defaults to: {settings.etc_hosts}")
+def main(*args, version: bool = False, dry: bool = False, path: str = None, output: str = None):
+    if version:
+        print(pkg_version)
+        return
+    dump(dry_run=dry, filepath=path, output=output)
+
+
+if __name__ == '__main__':
+    main()

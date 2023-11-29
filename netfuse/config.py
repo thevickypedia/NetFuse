@@ -1,14 +1,6 @@
 import platform
 import time
-from enum import Enum
 from typing import Callable, Tuple
-
-
-class SupportedSystems(str, Enum):
-    """Supported systems are At&t and Netgear."""
-
-    att: str = "At&t"
-    netgear: str = "Netgear"
 
 
 class Settings:

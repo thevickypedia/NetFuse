@@ -2,12 +2,17 @@
 
 DNS Resolver is a python script that dumps hostname and IP address mapping for localhost into host file
 
+### Installation
+```shell
+pip install NetFuse
+```
+
 ### Usage
 
-```python
-import netfuse
+> :bulb: &nbsp; Use `netfuse --help` to learn more
 
-netfuse.dump(netfuse.SupportedSystems.att)
+```shell
+sudo netfuse
 ```
 
 ### Note
