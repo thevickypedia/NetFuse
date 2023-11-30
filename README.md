@@ -2,7 +2,7 @@
 
 NetFuse is a python module to dump hostname and IP address mapping for localhost into the hosts file
 
-> :warning: &nbsp; Currently works only for At&t users
+> :warning: &nbsp; To use this module, the router should be `Netgear`, [OR] the ISP should be `At&t`
 
 ### Installation
 ```shell

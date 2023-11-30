@@ -4,10 +4,9 @@ from typing import Union, Dict, List
 
 import click
 
-from netfuse import version as pkg_version
-from netfuse.config import settings
+from netfuse.config import settings, ValidationError
 from netfuse.logger import LOGGER
-from netfuse.modules import att
+from netfuse.modules import att, netgear
 
 
 def parse_host_file(filepath) -> Dict[Union[int, str], Union[List[str], str]]:
@@ -92,14 +91,14 @@ def flush_dns_cache() -> None:
         LOGGER.info("Finished updating hosts file in %.2fs", time.time() - settings.start)
 
 
-def dump(dry_run: bool, filepath: str, output: str) -> None:
+def dump(dry_run: bool, filepath: str, output: str, module: Union[att, netgear]) -> None:
     """Dumps all devices' hostname and IP addresses into the hosts file."""
     host_entries = parse_host_file(filepath)
-    for device in att.get_attached_devices():
+    for device in module.attached_devices():
         if device.ipv4_address:
             host_entries[device.ipv4_address] = device.name
         else:
-            LOGGER.error(device.__dict__)
+            LOGGER.warning("%s [%s] does not have an IP address", device.name, device.mac_address)
     update_host_file(host_entries, output, dry_run)
     if output == settings.etc_hosts:
         flush_dns_cache()
@@ -107,17 +106,21 @@ def dump(dry_run: bool, filepath: str, output: str) -> None:
 
 @click.command()
 @click.pass_context
-@click.option("-v", "--version", required=False, is_flag=True, help="Get version of the package")
+@click.option("-m", "--model", required=False, help="Source model that's either 'att' or 'netgear'")
 @click.option("-d", "--dry", required=False, is_flag=True, help="Dry run without updating the hosts file")
 @click.option("-p", "--path", required=False, default=settings.etc_hosts,
               help=f"Path for the hosts file, defaults to: {settings.etc_hosts}")
 @click.option("-o", "--output", required=False, default=settings.etc_hosts,
               help=f"Output filepath to write the updated entries, defaults to: {settings.etc_hosts}")
-def main(*args, version: bool = False, dry: bool = False, path: str = None, output: str = None):
-    if version:
-        print(pkg_version)
-        return
-    dump(dry_run=dry, filepath=path, output=output)
+def main(*args, model: str, dry: bool = False, path: str = None, output: str = None):
+    mapped = {"att": att, "netgear": netgear}
+    if model in mapped.keys():
+        dump(dry_run=dry, filepath=path, output=output, module=mapped[model])
+    else:
+        raise ValidationError(
+            "\n\nmodel\n  Input should be 'att' or 'netgear' "
+            f"[type=string_type, input_value={model}, input_type={type(model)}]\n"
+        )
 
 
 if __name__ == '__main__':

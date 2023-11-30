@@ -46,7 +46,7 @@ def generate_dataframe() -> pd.DataFrame:
             LOGGER.error("[%s] - %s" % (response.status_code, response.text))
 
 
-def get_attached_devices() -> Generator[Device]:
+def attached_devices() -> Generator[Device]:
     """Get all devices connected to the router.
 
     Yields:
