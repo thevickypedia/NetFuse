@@ -1,3 +1,9 @@
+"""Customized logger function for NetFuse module.
+
+>>> LOGGER
+
+"""
+
 import logging
 
 LOGGER = logging.getLogger(__name__)

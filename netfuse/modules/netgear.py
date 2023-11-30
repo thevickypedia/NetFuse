@@ -3,7 +3,8 @@ from multiprocessing.context import TimeoutError
 from multiprocessing.pool import ThreadPool
 from typing import List
 
-from netfuse.config import Error, MissingRequirement, ValidationError, settings
+from netfuse.config import settings
+from netfuse.errors import Error, MissingRequirement, ValidationError
 
 
 def attached_devices():

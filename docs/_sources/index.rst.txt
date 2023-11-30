@@ -26,12 +26,6 @@ Config
    :members:
    :undoc-members:
 
-Errors
-======
-.. automodule:: netfuse.errors
-   :members:
-   :undoc-members:
-
 Logger
 ======
 .. automodule:: netfuse.logger

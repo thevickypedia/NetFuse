@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Welcome to NetFuse’s documentation! &#8212; NetFuse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/static.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NetFuse" href="README.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="NetFuse"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">NetFuse  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to NetFuse’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="welcome-to-netfuse-s-documentation">
+<h1>Welcome to NetFuse’s documentation!<a class="headerlink" href="#welcome-to-netfuse-s-documentation" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Read Me:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">NetFuse</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#note">Note</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="netfuse">
+<h1>——–NetFuse——–<a class="headerlink" href="#netfuse" title="Permalink to this heading">¶</a></h1>
+</section>
+<section id="module-netfuse.main">
+<span id="main"></span><h1>Main<a class="headerlink" href="#module-netfuse.main" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="netfuse.main.parse_host_file">
+<span class="sig-prename descclassname"><span class="pre">netfuse.main.</span></span><span class="sig-name descname"><span class="pre">parse_host_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#netfuse.main.parse_host_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the host file and convert the host entries into key-value pairs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filepath</strong> – Host file that matches FQDN with server IPs hosting a specific domain.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns a dictionary of parsed hosts file information.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[Union[int, str], List[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="netfuse.main.update_host_file">
+<span class="sig-prename descclassname"><span class="pre">netfuse.main.</span></span><span class="sig-name descname"><span class="pre">update_host_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host_entries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#netfuse.main.update_host_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the hosts entry file, with all the devices currently connected to the router.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host_entries</strong> – Data that has to be dumped into the hosts file.</p></li>
+<li><p><strong>output_file</strong> – Host file that matches FQDN with server IPs hosting a specific domain.</p></li>
+<li><p><strong>dry_run</strong> – Prints the information instead of writing to hosts file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="netfuse.main.flush_dns_cache">
+<span class="sig-prename descclassname"><span class="pre">netfuse.main.</span></span><span class="sig-name descname"><span class="pre">flush_dns_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#netfuse.main.flush_dns_cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flushes the DNS cache.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="netfuse.main.dump">
+<span class="sig-prename descclassname"><span class="pre">netfuse.main.</span></span><span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">module</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#netfuse.main.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dumps all devices’ hostname and IP addresses into the hosts file.</p>
+</dd></dl>
+
+</section>
+<section id="module-netfuse.config">
+<span id="config"></span><h1>Config<a class="headerlink" href="#module-netfuse.config" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="netfuse.config.Settings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">netfuse.config.</span></span><span class="sig-name descname"><span class="pre">Settings</span></span><a class="headerlink" href="#netfuse.config.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for the settings required by the module.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Settings</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="netfuse.config.Settings.format_key">
+<span class="sig-name descname"><span class="pre">format_key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#netfuse.config.Settings.format_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="netfuse.config.Settings.os">
+<span class="sig-name descname"><span class="pre">os</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Darwin'</span></em><a class="headerlink" href="#netfuse.config.Settings.os" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="netfuse.config.Settings.etc_hosts">
+<span class="sig-name descname"><span class="pre">etc_hosts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/etc/hosts'</span></em><a class="headerlink" href="#netfuse.config.Settings.etc_hosts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="netfuse.config.Settings.host_id">
+<span class="sig-name descname"><span class="pre">host_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">254</span></em><a class="headerlink" href="#netfuse.config.Settings.host_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="netfuse.config.Settings.flush_dns">
+<span class="sig-name descname"><span class="pre">flush_dns</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></em><a class="headerlink" href="#netfuse.config.Settings.flush_dns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="netfuse.config.Settings.start">
+<span class="sig-name descname"><span class="pre">start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#netfuse.config.Settings.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="netfuse.config.Settings.router_pass">
+<span class="sig-name descname"><span class="pre">router_pass</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#netfuse.config.Settings.router_pass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-netfuse.errors">
+<span id="errors"></span><h1>Errors<a class="headerlink" href="#module-netfuse.errors" title="Permalink to this heading">¶</a></h1>
+<p>Custom errors for NetFuse module.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Error</span>
+</pre></div>
+</div>
+<dl class="py exception">
+<dt class="sig sig-object py" id="netfuse.errors.Error">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">netfuse.errors.</span></span><span class="sig-name descname"><span class="pre">Error</span></span><a class="headerlink" href="#netfuse.errors.Error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Package’s base exception.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="netfuse.errors.ValidationError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">netfuse.errors.</span></span><span class="sig-name descname"><span class="pre">ValidationError</span></span><a class="headerlink" href="#netfuse.errors.ValidationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom validation error.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="netfuse.errors.MissingRequirement">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">netfuse.errors.</span></span><span class="sig-name descname"><span class="pre">MissingRequirement</span></span><a class="headerlink" href="#netfuse.errors.MissingRequirement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom requirement error.</p>
+</dd></dl>
+
+</section>
+<section id="module-netfuse.logger">
+<span id="logger"></span><h1>Logger<a class="headerlink" href="#module-netfuse.logger" title="Permalink to this heading">¶</a></h1>
+<p>Customized logger function for NetFuse module.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LOGGER</span>
+</pre></div>
+</div>
+</section>
+<section id="modules">
+<h1>——–Modules——–<a class="headerlink" href="#modules" title="Permalink to this heading">¶</a></h1>
+</section>
+<section id="module-netfuse.modules.att">
+<span id="at-t"></span><h1>At&amp;t<a class="headerlink" href="#module-netfuse.modules.att" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="netfuse.modules.att.get_network_id">
+<span class="sig-prename descclassname"><span class="pre">netfuse.modules.att.</span></span><span class="sig-name descname"><span class="pre">get_network_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#netfuse.modules.att.get_network_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get network id from the current IP address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Network ID section of the IP address, ignoring the host ID.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="netfuse.modules.att.generate_dataframe">
+<span class="sig-prename descclassname"><span class="pre">netfuse.modules.att.</span></span><span class="sig-name descname"><span class="pre">generate_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netfuse.modules.att.generate_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a dataframe using the devices information from router web page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Devices list as a data frame.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="netfuse.modules.att.attached_devices">
+<span class="sig-prename descclassname"><span class="pre">netfuse.modules.att.</span></span><span class="sig-name descname"><span class="pre">attached_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#netfuse.modules.squire.Device" title="netfuse.modules.squire.Device"><span class="pre">Device</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#netfuse.modules.att.attached_devices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all devices connected to the router.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Generator[Device]</em> – Yields each device information as a Device object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-netfuse.modules.netgear">
+<span id="netgear"></span><h1>Netgear<a class="headerlink" href="#module-netfuse.modules.netgear" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="netfuse.modules.netgear.attached_devices">
+<span class="sig-prename descclassname"><span class="pre">netfuse.modules.netgear.</span></span><span class="sig-name descname"><span class="pre">attached_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netfuse.modules.netgear.attached_devices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all attached devices in a Netgear router.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of device objects.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[pynetgear.Device]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-netfuse.modules.squire">
+<span id="squire"></span><h1>Squire<a class="headerlink" href="#module-netfuse.modules.squire" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="netfuse.modules.squire.Device">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">netfuse.modules.squire.</span></span><span class="sig-name descname"><span class="pre">Device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netfuse.modules.squire.Device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert dictionary into a device object.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Device</span>
+</pre></div>
+</div>
+<p>Set dictionary keys as attributes of Device object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dictionary</strong> – Takes the input dictionary as an argument.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Welcome to NetFuse’s documentation!</a></li>
+<li><a class="reference internal" href="#netfuse">——–NetFuse——–</a></li>
+<li><a class="reference internal" href="#module-netfuse.main">Main</a></li>
+<li><a class="reference internal" href="#module-netfuse.config">Config</a></li>
+<li><a class="reference internal" href="#module-netfuse.errors">Errors</a></li>
+<li><a class="reference internal" href="#module-netfuse.logger">Logger</a></li>
+<li><a class="reference internal" href="#modules">——–Modules——–</a></li>
+<li><a class="reference internal" href="#module-netfuse.modules.att">At&amp;t</a></li>
+<li><a class="reference internal" href="#module-netfuse.modules.netgear">Netgear</a></li>
+<li><a class="reference internal" href="#module-netfuse.modules.squire">Squire</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="README.html"
+                          title="next chapter">NetFuse</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="NetFuse"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">NetFuse  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to NetFuse’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, Vignesh Rao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+    </div>
+  </body>
+</html>

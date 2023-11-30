@@ -1,2 +1,5 @@
 .idea
 venv
+doc_gen/_build
+doc_gen/_static
+doc_gen/_templates

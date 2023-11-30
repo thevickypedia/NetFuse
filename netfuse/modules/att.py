@@ -2,13 +2,19 @@ import io
 import socket
 from collections.abc import Generator
 
-from netfuse.config import Error, MissingRequirement, settings
+from netfuse.config import settings
+from netfuse.errors import Error, MissingRequirement
 from netfuse.logger import LOGGER
 from netfuse.modules.squire import Device
 
 
 def get_network_id() -> str:
-    """Get network id from the current IP address."""
+    """Get network id from the current IP address.
+
+    Returns:
+        str:
+        Network ID section of the IP address, ignoring the host ID.
+    """
     socket_ = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
         socket_.connect(("8.8.8.8", 80))

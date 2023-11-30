@@ -1,11 +1,13 @@
 import subprocess
 import sys
 import time
+from types import ModuleType
 from typing import Dict, List, Union
 
 import click
 
-from netfuse.config import Error, ValidationError, settings
+from netfuse.config import settings
+from netfuse.errors import Error, ValidationError
 from netfuse.logger import LOGGER
 from netfuse.modules import att, netgear
 
@@ -103,7 +105,7 @@ def flush_dns_cache() -> None:
         LOGGER.info("Finished updating hosts file in %.2fs", time.time() - settings.start)
 
 
-def dump(dry_run: bool, filepath: str, output: str, module: att or netgear) -> None:
+def dump(dry_run: bool, filepath: str, output: str, module: ModuleType) -> None:
     """Dumps all devices' hostname and IP addresses into the hosts file."""
     host_entries = parse_host_file(filepath)
     for device in module.attached_devices():
