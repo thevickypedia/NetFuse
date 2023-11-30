@@ -22,11 +22,13 @@ def attached_devices():
     if not settings.router_pass:
         raise ValidationError(
             "\n\nrouter_pass\n\tEnvironment variable should be a valid string "
-            f"[type=string_type, input_value={settings.router_pass}, input_type={type(settings.router_pass)}]\n"
+            f"[type=string_type, input_value={settings.router_pass}, input_type={type(settings.router_pass)}]"
         )
     netgear = pynetgear.Netgear(password=settings.router_pass)
     process = ThreadPool(processes=1).apply_async(func=netgear.get_attached_devices)
     try:
         return process.get(60)  # default is 120, we don't want to wait that long
     except TimeoutError:
-        raise Error("Failed to get attached devices.")
+        raise Error(
+            "Failed to get attached devices."
+        )

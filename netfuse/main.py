@@ -1,10 +1,12 @@
+import os
 import subprocess
+import sys
 import time
 from typing import Union, Dict, List
 
 import click
 
-from netfuse.config import settings, ValidationError
+from netfuse.config import settings, ValidationError, Error
 from netfuse.logger import LOGGER
 from netfuse.modules import att, netgear
 
@@ -65,19 +67,30 @@ def update_host_file(host_entries: Dict, output_file: str, dry_run: bool) -> Non
                 continue
             print(f"{key}\t{value}")
         return
-    with open(output_file, 'w') as file:
-        for key, value in host_entries.items():
-            if value is None:
-                file.write("\n")
-                continue
-            if isinstance(key, int):
-                file.write(f"{value}\n")
-                continue
-            key = key.split('_')[0]
-            if isinstance(value, list):
-                file.write(f"{key}\t{', '.join(value)}\n")
-                continue
-            file.write(f"{key}\t{value}\n")
+    try:
+        file = open(output_file, 'w')
+    except PermissionError as error:
+        mod = f"netfuse {' '.join(sys.argv[1:])}"
+        if settings.os == "Windows":
+            cmd = f'runas /user:Administrator "{mod}"'
+        else:
+            cmd = f'sudo {mod}'
+        raise Error(
+            f"\n{error.strerror}\n\tUse {cmd!r}"
+        )
+    for key, value in host_entries.items():
+        if value is None:
+            file.write("\n")
+            continue
+        if isinstance(key, int):
+            file.write(f"{value}\n")
+            continue
+        key = key.split('_')[0]
+        if isinstance(value, list):
+            file.write(f"{key}\t{', '.join(value)}\n")
+            continue
+        file.write(f"{key}\t{value}\n")
+    file.close()
 
 
 def flush_dns_cache() -> None:
@@ -104,6 +117,7 @@ def dump(dry_run: bool, filepath: str, output: str, module: att or netgear) -> N
         flush_dns_cache()
 
 
+# noinspection PyUnusedLocal
 @click.command()
 @click.pass_context
 @click.option("-m", "--model", required=False, help="Source model that's either 'att' or 'netgear'")
@@ -126,7 +140,7 @@ def main(*args, model: str, host_id: int, dry: bool = False, path: str = None, o
     else:
         raise ValidationError(
             "\n\n-m/--model\n\tInput should be 'att' or 'netgear' "
-            f"[type=string_type, input_value={model}, input_type={type(model)}]\n"
+            f"[type=string_type, input_value={model}, input_type={type(model)}]"
         )
 
 

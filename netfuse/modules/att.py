@@ -60,7 +60,9 @@ def attached_devices() -> Generator[Device]:
     device_info = {}
     dataframe = generate_dataframe()
     if dataframe is None:
-        raise Error("Failed to get attached devices.")
+        raise Error(
+            "Failed to get attached devices."
+        )
     for value in dataframe.values:
         if str(value[0]) == "nan":
             yield Device(device_info)
