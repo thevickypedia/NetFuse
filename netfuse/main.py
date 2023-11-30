@@ -91,7 +91,7 @@ def flush_dns_cache() -> None:
         LOGGER.info("Finished updating hosts file in %.2fs", time.time() - settings.start)
 
 
-def dump(dry_run: bool, filepath: str, output: str, module: Union[att, netgear]) -> None:
+def dump(dry_run: bool, filepath: str, output: str, module: att or netgear) -> None:
     """Dumps all devices' hostname and IP addresses into the hosts file."""
     host_entries = parse_host_file(filepath)
     for device in module.attached_devices():
@@ -107,18 +107,25 @@ def dump(dry_run: bool, filepath: str, output: str, module: Union[att, netgear])
 @click.command()
 @click.pass_context
 @click.option("-m", "--model", required=False, help="Source model that's either 'att' or 'netgear'")
+@click.option("-h", "--host-id", required=False, default=settings.host_id,
+              help="Host ID of the network administrator page")
 @click.option("-d", "--dry", required=False, is_flag=True, help="Dry run without updating the hosts file")
 @click.option("-p", "--path", required=False, default=settings.etc_hosts,
               help=f"Path for the hosts file, defaults to: {settings.etc_hosts}")
 @click.option("-o", "--output", required=False, default=settings.etc_hosts,
               help=f"Output filepath to write the updated entries, defaults to: {settings.etc_hosts}")
-def main(*args, model: str, dry: bool = False, path: str = None, output: str = None):
+def main(*args, model: str, host_id: int, dry: bool = False, path: str = None, output: str = None):
+    try:
+        assert isinstance(host_id, int) and 1 <= host_id <= 256
+        settings.host_id = host_id  # override default if assertion passes
+    except AssertionError as error:
+        LOGGER.critical(error)
     mapped = {"att": att, "netgear": netgear}
     if model in mapped.keys():
         dump(dry_run=dry, filepath=path, output=output, module=mapped[model])
     else:
         raise ValidationError(
-            "\n\nmodel\n  Input should be 'att' or 'netgear' "
+            "\n\n-m/--model\n\tInput should be 'att' or 'netgear' "
             f"[type=string_type, input_value={model}, input_type={type(model)}]\n"
         )
 

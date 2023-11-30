@@ -4,8 +4,16 @@ from os import environ
 from typing import Callable, Tuple
 
 
+class Error(Exception):
+    """Package's base exception."""
+
+
 class ValidationError(ValueError):
     """Custom validation error."""
+
+
+class MissingRequirement(ImportError):
+    """Custom requirement error."""
 
 
 class Settings:
@@ -19,6 +27,7 @@ class Settings:
     os: str = platform.system()
     # Host file that matches FQDN with server IPs hosting a specific domain
     etc_hosts: str = "/etc/hosts"
+    host_id: int = 254
     if os == "Windows":
         etc_hosts: str = r"C:\Windows\System32\drivers\etc\hosts"
         flush_dns: Tuple[str] = ("ipconfig /flushdnscache",)

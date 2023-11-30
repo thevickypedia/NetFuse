@@ -2,10 +2,7 @@ import io
 import socket
 from collections.abc import Generator
 
-import pandas as pd
-import requests
-
-from netfuse.config import settings
+from netfuse.config import settings, MissingRequirement, Error
 from netfuse.logger import LOGGER
 from netfuse.modules.squire import Device
 
@@ -24,19 +21,26 @@ def get_network_id() -> str:
     return network_id
 
 
-def generate_dataframe() -> pd.DataFrame:
+# noinspection HttpUrlsUsage
+def generate_dataframe():
     """Generate a dataframe using the devices information from router web page.
 
     Returns:
-        pd.DataFrame:
+        pandas.DataFrame:
         Devices list as a data frame.
     """
+    try:
+        import requests
+        import pandas as pd
+    except ImportError as err:
+        raise MissingRequirement(
+            f"\n\n{err.name}\n\tpip install netfuse[att]"
+        )
     # pd.set_option('display.max_rows', None)
     try:
-        response = requests.get(url=f"http://{get_network_id()}.254/cgi-bin/devices.ha")
+        response = requests.get(url=f"http://{get_network_id()}.{settings.host_id}/cgi-bin/devices.ha")
     except requests.RequestException as error:
         LOGGER.error(error)
-        raise ConnectionError(error.args)
     else:
         if response.ok:
             html_source = response.text
@@ -56,7 +60,7 @@ def attached_devices() -> Generator[Device]:
     device_info = {}
     dataframe = generate_dataframe()
     if dataframe is None:
-        return
+        raise Error("Failed to get attached devices.")
     for value in dataframe.values:
         if str(value[0]) == "nan":
             yield Device(device_info)
