@@ -1,4 +1,4 @@
-from typing import Optional, Union, Any
+from typing import Any, Optional, Union
 
 
 class Device:

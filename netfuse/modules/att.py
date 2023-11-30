@@ -2,7 +2,7 @@ import io
 import socket
 from collections.abc import Generator
 
-from netfuse.config import settings, MissingRequirement, Error
+from netfuse.config import Error, MissingRequirement, settings
 from netfuse.logger import LOGGER
 from netfuse.modules.squire import Device
 
@@ -30,8 +30,8 @@ def generate_dataframe():
         Devices list as a data frame.
     """
     try:
-        import requests
         import pandas as pd
+        import requests
     except ImportError as err:
         raise MissingRequirement(
             f"\n\n{err.name}\n\tpip install netfuse[att]"

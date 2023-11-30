@@ -34,7 +34,7 @@ class Settings:
     elif os == "Darwin":
         flush_dns: Tuple[str] = ("sudo dscacheutil -flushcache", "sudo killall -HUP mDNSResponder",)
     else:
-        flush_dns: Tuple = tuple()
+        flush_dns: Tuple = ()
     # Unlike Windows and macOS, Ubuntu and Linux Mint do not cache DNS queries at the operating system level by default.
     start = time.time()
     router_pass = environ.get('router_pass') or environ.get('ROUTER_PASS')

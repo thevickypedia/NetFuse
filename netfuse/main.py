@@ -1,12 +1,11 @@
-import os
 import subprocess
 import sys
 import time
-from typing import Union, Dict, List
+from typing import Dict, List, Union
 
 import click
 
-from netfuse.config import settings, ValidationError, Error
+from netfuse.config import Error, ValidationError, settings
 from netfuse.logger import LOGGER
 from netfuse.modules import att, netgear
 
