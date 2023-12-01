@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+v0.0.4 (11/30/2023)
+-------------------
+- Includes customized error messages with alternate recommendations
+
 v0.0.3 (11/29/2023)
 -------------------
 - Module specific installations
