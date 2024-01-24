@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+v0.0.5 (01/24/2024)
+-------------------
+- Includes module name in logger format
+
 v0.0.4 (11/30/2023)
 -------------------
 - Includes customized error messages with alternate recommendations
