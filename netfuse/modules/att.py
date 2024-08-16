@@ -19,7 +19,7 @@ def get_network_id() -> str:
     try:
         socket_.connect(("8.8.8.8", 80))
         ip_address = socket_.getsockname()[0]
-        network_id = '.'.join(ip_address.split('.')[0:3])
+        network_id = ".".join(ip_address.split(".")[0:3])
         socket_.close()
     except OSError as error:
         LOGGER.warning(error)
@@ -39,12 +39,12 @@ def generate_dataframe():
         import pandas as pd
         import requests
     except ImportError as err:
-        raise MissingRequirement(
-            f"\n\n{err.name}\n\tpip install netfuse[att]"
-        )
+        raise MissingRequirement(f"\n\n{err.name}\n\tpip install netfuse[att]")
     # pd.set_option('display.max_rows', None)
     try:
-        response = requests.get(url=f"http://{get_network_id()}.{settings.host_id}/cgi-bin/devices.ha")
+        response = requests.get(
+            url=f"http://{get_network_id()}.{settings.host_id}/cgi-bin/devices.ha"
+        )
     except requests.RequestException as error:
         LOGGER.error(error)
     else:
@@ -66,16 +66,14 @@ def attached_devices() -> Generator[Device]:
     device_info = {}
     dataframe = generate_dataframe()
     if dataframe is None:
-        raise Error(
-            "Failed to get attached devices."
-        )
+        raise Error("Failed to get attached devices.")
     for value in dataframe.values:
         if str(value[0]) == "nan":
             yield Device(device_info)
             device_info = {}
         elif value[0] == "IPv4 Address / Name":
-            key = value[0].split('/')
-            val = value[1].split('/')
+            key = value[0].split("/")
+            val = value[1].split("/")
             device_info[settings.format_key(key[0].strip())] = val[0].strip()
             device_info[settings.format_key(key[1].strip())] = val[1].strip()
         else:

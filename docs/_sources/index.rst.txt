@@ -17,40 +17,32 @@ Welcome to NetFuse's documentation!
 Main
 ====
 .. automodule:: netfuse.main
-   :members:
-   :undoc-members:
 
 Config
 ======
 .. automodule:: netfuse.config
-   :members:
-   :undoc-members:
+
+Errors
+======
+.. automodule:: netfuse.errors
 
 Logger
 ======
 .. automodule:: netfuse.logger
-   :members:
-   :undoc-members:
 
 --------Modules--------
 =======================
 At&t
 ====
 .. automodule:: netfuse.modules.att
-   :members:
-   :undoc-members:
 
 Netgear
 =======
 .. automodule:: netfuse.modules.netgear
-   :members:
-   :undoc-members:
 
 Squire
 ======
 .. automodule:: netfuse.modules.squire
-   :members:
-   :undoc-members:
 
 Indices and tables
 ==================

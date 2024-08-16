@@ -1,7 +1,6 @@
 # noinspection PyProtectedMember
 from multiprocessing.context import TimeoutError
 from multiprocessing.pool import ThreadPool
-from typing import List
 
 from netfuse.config import settings
 from netfuse.errors import Error, MissingRequirement, ValidationError
@@ -17,9 +16,7 @@ def attached_devices():
     try:
         import pynetgear
     except ImportError as err:
-        raise MissingRequirement(
-            f"\n\n{err.name}\n\tpip install netfuse[netgear]"
-        )
+        raise MissingRequirement(f"\n\n{err.name}\n\tpip install netfuse[netgear]")
     if not settings.router_pass:
         raise ValidationError(
             "\n\nrouter_pass\n\tEnvironment variable should be a valid string "
@@ -30,6 +27,4 @@ def attached_devices():
     try:
         return process.get(60)  # default is 120, we don't want to wait that long
     except TimeoutError:
-        raise Error(
-            "Failed to get attached devices."
-        )
+        raise Error("Failed to get attached devices.")

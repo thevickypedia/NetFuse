@@ -8,7 +8,9 @@ clean_docs() {
   directory="docs"
   file_to_keep="CNAME"
   if [ -e "${directory}/${file_to_keep}" ]; then
-    find "${directory}" ! -name "${file_to_keep}" -mindepth 1 -delete
+    find "${directory}" -mindepth 1 ! -name "${file_to_keep}" -exec rm -rf {} +
+  else
+    find "${directory}" -mindepth 1 -exec rm -rf {} +
   fi
 }
 
@@ -26,8 +28,8 @@ gen_docs() {
   cp static.css ../docs/_static
 }
 
-gen_docs &
 clean_docs &
+gen_docs &
 update_release_notes &
 
 wait
@@ -35,4 +37,3 @@ wait
 # The existence of this file tells GitHub Pages not to run the published files through Jekyll.
 # This is important since Jekyll will discard any files that begin with _
 touch docs/.nojekyll
-rm doc_gen/README.md

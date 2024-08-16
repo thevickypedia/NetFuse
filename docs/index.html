@@ -69,25 +69,25 @@
 <section id="module-netfuse.main">
 <span id="main"></span><h1>Main<a class="headerlink" href="#module-netfuse.main" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="netfuse.main.parse_host_file">
-<span class="sig-prename descclassname"><span class="pre">netfuse.main.</span></span><span class="sig-name descname"><span class="pre">parse_host_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#netfuse.main.parse_host_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse the host file and convert the host entries into key-value pairs.</p>
+<dt class="sig sig-object py" id="netfuse.main.center_text">
+<span class="sig-prename descclassname"><span class="pre">netfuse.main.</span></span><span class="sig-name descname"><span class="pre">center_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#netfuse.main.center_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Centers the text with 80 as overall padding size.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filepath</strong> – Host file that matches FQDN with server IPs hosting a specific domain.</p>
+<dd class="field-odd"><p><strong>text</strong> – Text to be centered.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Returns a dictionary of parsed hosts file information.</p>
+<dd class="field-even"><p>Text centered using asterisk.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict[Union[int, str], List[str]]</p>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="netfuse.main.update_host_file">
-<span class="sig-prename descclassname"><span class="pre">netfuse.main.</span></span><span class="sig-name descname"><span class="pre">update_host_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host_entries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#netfuse.main.update_host_file" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">netfuse.main.</span></span><span class="sig-name descname"><span class="pre">update_host_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host_entries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#netfuse.main.update_host_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the hosts entry file, with all the devices currently connected to the router.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -263,12 +263,6 @@
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Device</span>
 </pre></div>
 </div>
-<p>Set dictionary keys as attributes of Device object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dictionary</strong> – Takes the input dictionary as an argument.</p>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
