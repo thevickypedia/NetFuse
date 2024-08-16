@@ -26,7 +26,9 @@ def center_text(text: str) -> str:
 
 
 HEADER = center_text("Begin NetFuse")
-WARNING1 = center_text("Please do not make any manual changes within this section".upper())
+WARNING1 = center_text(
+    "Please do not make any manual changes within this section".upper()
+)
 WARNING2 = center_text("Any modifications made here will be overwritten".upper())
 FOOTER = center_text("End NetFuse")
 
@@ -85,7 +87,9 @@ def dump(dry_run: bool, filepath: str, output: str, module: ModuleType) -> None:
             host_entries += f"{line}\n"
     host_entries = host_entries.strip()
     host_entries += "\n\n" + HEADER + "\n"
-    host_entries += "\n" + "*" * 83 + "\n" + WARNING1 + "\n" + WARNING2 + "\n" + "*" * 83 + "\n\n"
+    host_entries += "\n" + "*" * 83 + "\n"
+    host_entries += WARNING1 + "\n" + WARNING2
+    host_entries += "\n" + "*" * 83 + "\n\n"
     for device in module.attached_devices():
         if device.ipv4_address:
             host_entries += f"{device.ipv4_address}\t{device.name}\n"

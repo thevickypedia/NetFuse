@@ -1,6 +1,12 @@
 Release Notes
 =============
 
+v0.1.0 (08/15/2024)
+-------------------
+- Includes bug fix to avoid duplicate entries in ``hosts`` file
+- Generates host entries in a dedicated block
+- Improved linting and upgraded dependencies
+
 v0.0.5 (01/24/2024)
 -------------------
 - Includes module name in logger format
