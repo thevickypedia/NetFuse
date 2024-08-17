@@ -1,6 +1,7 @@
 import subprocess
 import sys
 import time
+from datetime import datetime
 from types import ModuleType
 
 import click
@@ -26,6 +27,7 @@ def center_text(text: str) -> str:
 
 
 HEADER = center_text("Begin NetFuse")
+UPDATE_TIME = center_text(f"UPDATED: {datetime.now().strftime('%c')}")
 WARNING1 = center_text(
     "Please do not make any manual changes within this section".upper()
 )
@@ -90,11 +92,11 @@ def dump(
     host_entries = host_entries.strip()
     host_entries += "\n\n" + HEADER + "\n"
     host_entries += "\n" + "*" * 83 + "\n"
-    host_entries += WARNING1 + "\n" + WARNING2
+    host_entries += WARNING1 + "\n" + WARNING2 + "\n" + UPDATE_TIME
     host_entries += "\n" + "*" * 83 + "\n\n"
     for device in module.attached_devices():
         if device.ipv4_address:
-            host_entries += f"{device.ipv4_address}\t{device.name}{suffix}\n"
+            host_entries += f"{device.ipv4_address}\t{device.name}{suffix or ''}\n"
         else:
             LOGGER.debug(
                 "%s [%s] does not have an IP address", device.name, device.mac_address
