@@ -70,13 +70,15 @@ def flush_dns_cache() -> None:
         )
 
 
-def dump(dry_run: bool, filepath: str, output: str, module: ModuleType) -> None:
+def dump(
+    dry_run: bool, filepath: str, output: str, module: ModuleType, suffix: str
+) -> None:
     """Dumps all devices' hostname and IP addresses into the hosts file."""
     with open(filepath) as file:
         tmp_entries = file.read()
     host_entries = ""
     inside_block = False
-    for idx, line in enumerate(tmp_entries.splitlines()):
+    for line in tmp_entries.splitlines():
         if HEADER in line:
             inside_block = True
             continue
@@ -92,7 +94,7 @@ def dump(dry_run: bool, filepath: str, output: str, module: ModuleType) -> None:
     host_entries += "\n" + "*" * 83 + "\n\n"
     for device in module.attached_devices():
         if device.ipv4_address:
-            host_entries += f"{device.ipv4_address}\t{device.name}\n"
+            host_entries += f"{device.ipv4_address}\t{device.name}{suffix}\n"
         else:
             LOGGER.debug(
                 "%s [%s] does not have an IP address", device.name, device.mac_address
@@ -120,6 +122,13 @@ def dump(dry_run: bool, filepath: str, output: str, module: ModuleType) -> None:
     help="Host ID of the network administrator page",
 )
 @click.option(
+    "-s",
+    "--suffix",
+    required=False,
+    default=settings.suffix,
+    help="Suffix to add to each hostname (eg: .attlocal.net)",
+)
+@click.option(
     "-d",
     "--dry",
     required=False,
@@ -144,6 +153,7 @@ def run(
     *args,
     model: str,
     host_id: int = settings.host_id,
+    suffix: str = settings.suffix,
     dry: bool = False,
     path: str = settings.etc_hosts,
     output: str = settings.etc_hosts,
@@ -154,6 +164,7 @@ def run(
         *args: Placeholder arg for click module.
         model: NetFuse module to choose. Choices are att or netgear.
         host_id: Host ID for At&t home network.
+        suffix: Suffix to add to each hostname.
         dry: Boolean flag to enable dry run.
         path: Input filepath for host entry file.
         output: Output filepath for host entry file.
@@ -165,7 +176,13 @@ def run(
         LOGGER.critical(error)
     mapped = {"att": att, "netgear": netgear}
     if model in mapped.keys():
-        dump(dry_run=dry, filepath=path, output=output, module=mapped[model])
+        dump(
+            dry_run=dry,
+            filepath=path,
+            output=output,
+            module=mapped[model],
+            suffix=suffix,
+        )
     else:
         raise ValidationError(
             "\n\n-m/--model\n\tInput should be 'att' or 'netgear' "

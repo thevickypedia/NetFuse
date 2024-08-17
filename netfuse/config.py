@@ -1,6 +1,6 @@
+import os
 import platform
 import time
-from os import environ
 from typing import Callable, Tuple
 
 
@@ -19,7 +19,8 @@ class Settings:
     flush_dns: Tuple = ()
     # Unlike Windows and macOS, Ubuntu and Linux Mint do not cache DNS queries at the operating system level by default.
     start: float = None
-    router_pass = None
+    router_pass: str = None
+    suffix: str = None
 
 
 settings = Settings()
@@ -38,5 +39,6 @@ else:
         "sudo resolvectl flush-caches",  # Ubuntu 22.04 and higher
         "sudo systemd-resolve --flush-caches",  # Ubuntu 17.04 and higher (18.04)
     )
-settings.router_pass = environ.get("router_pass") or environ.get("ROUTER_PASS")
+settings.router_pass = os.environ.get("router_pass") or os.environ.get("ROUTER_PASS")
+settings.suffix = os.environ.get("suffix") or os.environ.get("SUFFIX") or ""
 settings.start = time.time()
